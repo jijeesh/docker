@@ -84,23 +84,18 @@ fi
     # A blank passphrase
     PASSPHRASE=""
     # Set our CSR variables
-    SUBJ="C=US
-ST=Connecticut
-O=
-localityName=New Haven
-commonName=$DOMAIN
-organizationalUnitName=
-emailAddress=
-"
 
+    SUBJ="/C=US/ST=Connecticut/L=New Haven/commonName=$DOMAIN"
     # Create our SSL directory
     # in case it doesn't exist
-    sudo mkdir -p "$SSL_DIR"
+    mkdir -p "$SSL_DIR"
 
     # Generate our Private Key, CSR and Certificate
-    sudo openssl genrsa -out "$SSL_DIR/$cname_$servn.key" 2048
-    sudo openssl req -new -subj "$(echo -n "$SUBJ" | tr "\n" "/")" -key "$SSL_DIR/$cname_$servn.key" -out "$SSL_DIR/$cname_$servn.csr" -passin pass:$PASSPHRASE
-    sudo openssl x509 -req -days 365 -in "$SSL_DIR/$cname_$servn.csr" -signkey "$SSL_DIR/$cname_$servn.key" -out "$SSL_DIR/$cname_$servn.crt"
+    openssl genrsa -out "$SSL_DIR/$cname_$servn.key" 2048
+
+    openssl req -new -subj "$SUBJ" -key "$SSL_DIR/$cname_$servn.key" -out $SSL_DIR/$cname_$servn.csr -passin pass:$PASSPHRASE
+
+    openssl x509 -req -days 365 -in "$SSL_DIR/$cname_$servn.csr" -signkey "$SSL_DIR/$cname_$servn.key" -out "$SSL_DIR/$cname_$servn.crt"
 
     if ! echo -e /etc/httpd/conf.d/$cname_$servn.key; then
         echo "Certificate key wasn't created !"
