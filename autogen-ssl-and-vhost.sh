@@ -68,11 +68,11 @@ fi
 echo "Would you like me to create ssl virtual host [y/n]? "
 read q
 if [[ "${q}" == "yes" ]] || [[ "${q}" == "y" ]]; then
-openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/httpd/conf.d/$cname_$servn.key -out /etc/httpd/conf.d/$cname_$servn.crt
+
 # Specify where we will install
 # the xip.io certificate
 
-SSL_DIR="/etc/ssl/$cname_$servn"
+SSL_DIR="/etc/httpd/conf.d"
 
 
 # Set the wildcarded domain
@@ -98,7 +98,7 @@ emailAddress=
 sudo mkdir -p "$SSL_DIR"
 
 # Generate our Private Key, CSR and Certificate
-sudo openssl genrsa -out "$SSL_DIR/xip.io.key" 2048
+sudo openssl genrsa -out "$SSL_DIR/$cname_$servn.key" 2048
 sudo openssl req -new -subj "$(echo -n "$SUBJ" | tr "\n" "/")" -key "$SSL_DIR/$cname_$servn.key" -out "$SSL_DIR/$cname_$servn.csr" -passin pass:$PASSPHRASE
 sudo openssl x509 -req -days 365 -in "$SSL_DIR/$cname_$servn.csr" -signkey "$SSL_DIR/$cname_$servn.key" -out "$SSL_DIR/$cname_$servn.crt"
 
