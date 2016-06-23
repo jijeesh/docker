@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # This script is used for create virtual hosts on CentOs.
-# Created by Jijeesh K A from http://alexnogard.com
-# Improved by Jijeesh K A from http://you.canmakethat.com
+# Created by Jijeesh K A
+# Improved by Jijeesh K A
 # Feel free to modify it
 #   PARAMETERS
 #
