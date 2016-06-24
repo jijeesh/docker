@@ -144,7 +144,11 @@ Satisfy Any
 #fi
 echo "======================================"
 echo "All works done! You should be able to see your website at http://$servn"
+echo "======================================="
+echo "docker run -v phalcon:$dir$cname_$servn -p 81:80 -p 444:443 -d centos7/httpd:test"
 echo ""
+echo " Connect your site with http://ipaddress:81 https://ipaddress:444"
+ ""
 echo "Share the love! <3"
 echo "======================================"
 echo ""
