@@ -27,6 +27,7 @@ if [ "$(whoami)" != 'root' ]; then
     echo "You have to execute this script as root user"
     exit 1;
 fi
+yum install -y httpd openssl mod_ssl
 #if you want to add it dynamically uncomment the bellow lines
 #read -p "Enter the server name your want (without www) : " servn
 #read -p "Enter a CNAME (e.g. :www or dev for dev.website.com) : " cname
