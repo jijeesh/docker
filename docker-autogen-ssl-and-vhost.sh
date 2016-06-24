@@ -9,10 +9,12 @@
 # $dir          - directory of web files
 # $servn        - webserver address without www.
 # $cname        - cname of webserver
+# $SSL_DIR      -  ssl storing locatin
 # EXAMPLE
 # Web directory = /var/www/
 # ServerName    = domain.com
 # cname            = devel
+#
 #
 #
 # Check if you execute the script as root user
@@ -73,11 +75,8 @@ if ! echo -e /etc/httpd/conf.d/$cname_$servn.conf; then
 else
     echo "Virtual host created !"
 fi
-#echo "Would you like me to create ssl virtual host [y/n]? "
-#read q
-#if [[ "${q}" == "yes" ]] || [[ "${q}" == "y" ]]; then
-    # Specify where we will install
-    # the xip.io certificate
+
+    # the  certificate
     SSL_DIR="/etc/httpd/conf.d"
     # Set the wildcarded domain
     # we want to use
@@ -130,26 +129,21 @@ Satisfy Any
     else
         echo "SSL Virtual host created !"
     fi
-#fi
 
-#echo "127.0.0.1 $servn" >> /etc/hosts
-#if [ "$alias" != "$servn" ]; then
-#echo "127.0.0.1 $alias" >> /etc/hosts
-#fi
-#echo "Testing configuration"
-#service httpd configtest
-#echo "Would you like me to restart the server [y/n]? "
-#read q
-#if [[ "${q}" == "yes" ]] || [[ "${q}" == "y" ]]; then
-#service httpd restart
-#fi
 echo "======================================"
 echo "All works done! You should be able to see your website at http://$servn"
 echo "======================================="
 echo "docker run -v phalcon:$dir$cname_$servn -p 81:80 -p 444:443 -d centos7/httpd:test"
 echo ""
+    echo "127.0.0.1 $servn into your system or in dns  /etc/hosts"
+    echo " Connect your site with http://$servn:81 https://$servn:444"
+if [ "$alias" != "$servn" ]; then
+    echo "127.0.0.1 $alias into your system or in dns /etc/hosts"
+    echo " Connect your site with http://$alias:81 https://$alias:444"
+fi
 echo " Connect your site with http://ipaddress:81 https://ipaddress:444"
- ""
+
+echo "========================================="
 echo "Share the love! <3"
 echo "======================================"
 echo ""
