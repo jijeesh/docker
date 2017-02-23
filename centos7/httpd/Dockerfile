@@ -59,7 +59,6 @@ Require all granted \n\
 RUN ln -s /etc/httpd/sites-available/${cname}_$servn.conf /etc/httpd/sites-enabled/${cname}_$servn.conf
 
 
-
 EXPOSE 80
 
 RUN rm -rf /run/httpd/* /tmp/httpd*
