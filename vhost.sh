@@ -121,3 +121,4 @@ echo "Share the love! <3"
 echo "======================================"
 echo ""
 echo "Wanna contribute to improve this script? Found a bug? contribute ? "
+
