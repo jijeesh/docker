@@ -1,0 +1,11 @@
+version: '2'
+services:
+  svnmanager:
+    image: svnmanager:latest
+    ports:
+     - "192.168.11.7:8010:80"
+    mem_limit: 3048m
+    cpuset: 0,1
+    restart: always
+    environment:
+       PRODUCTION: "true"

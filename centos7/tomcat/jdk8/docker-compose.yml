@@ -1,0 +1,13 @@
+version: '2'
+services:
+  tomcat8:
+          image: tomcat:8
+    ports:
+     - "192.168.11.7:8011:8080"
+    mem_limit: 3052m
+    cpuset: 0,1
+    volumes:
+     - ./webapps:/opt/tomcat/webapps
+     - ./logs:/opt/tomcat/logs
+    environment:
+       CATALINA_OPTS: "$CATALINA_OPTS   -Dfile.encoding=UTF-8 -Djavax.servlet.request.encoding=UTF-8"

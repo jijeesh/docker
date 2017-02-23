@@ -1,0 +1,24 @@
+docker run -p 444:444 --privileged -h=chef -v /centos/home/chef/444/var/opt/opscode -v /centos/home/chef/444/opt/opscode:/opt/opscode -v /centos/home/chef/444/etc/opscode:/etc/opscode -v /centos/home/chef/444/etc/chef-server:/etc/chef-server -it ubuntu:12.04 /bin/bash
+#docker run -p 444:443 --privileged -h=chef -it ubuntu:12.04 /bin/bash
+#docker run -p 443 --privileged -h=chef -it ubuntu:12.04 /bin/bash
+docker cp chef-server_11.1.6-1_amd64.deb 0f8b9e2e3d78:/
+apt-get update
+dpkg-divert --local --rename --add /sbin/initctl
+ln -sf /bin/true /sbin/initctl
+sysctl -w kernel.shmmax=17179869184
+sysctl -w kernel.shmall=4194304
+dpkg -i chef-server_11.1.6-1_amd64.deb 
+/opt/chef-server/embedded/bin/runsvdir-start &
+chef-server-ctl  reconfigure
+ip addr
+
+
+
+###########################3333
+to change default port
+
+You have to create or open /etc/chef-server/chef-server.rb and add the line below
+
+nginx['ssl_port'] = 449
+
+then run: sudo chef-server-ctl reconfigure ; sudo chef-server-ctl restart

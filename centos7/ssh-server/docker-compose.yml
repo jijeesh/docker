@@ -1,0 +1,10 @@
+version: '2'
+services:
+  sshserver:
+    image: ssh-server
+    ports:
+      - "2222:22"
+    mem_limit: 500m
+    volumes:
+     - /data/home/mipuser/docker/sshServer/j2:/home/user/project
+    restart: always
