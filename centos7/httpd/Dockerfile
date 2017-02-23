@@ -64,4 +64,3 @@ EXPOSE 80
 
 RUN rm -rf /run/httpd/* /tmp/httpd*
 CMD ["/usr/sbin/apachectl", "-D", "FOREGROUND"]
-
