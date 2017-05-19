@@ -40,6 +40,9 @@ java.util.logging.FileHandler.count = 15 \n\
 RUN sed -i \
 	-e 's/^handlers = .*/handlers = java.util.logging.FileHandler, 1catalina.org.apache.juli.AsyncFileHandler, 2localhost.org.apache.juli.AsyncFileHandler, 3manager.org.apache.juli.AsyncFileHandler, 4host-manager.org.apache.juli.AsyncFileHandler, java.util.logging.ConsoleHandler/1' \
 	${CATALINA_HOME}/conf/logging.properties
+RUN yum -y install google-*fonts
+RUN yum -y -q reinstall glibc-common && locale -a
+
 EXPOSE 8080
 CMD ["catalina.sh", "run"]
 
