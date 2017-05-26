@@ -1,0 +1,10 @@
+version: '2'
+services:
+  httpcgi:
+    image: httpd:cgi
+    ports:
+      - "90:80"
+    mem_limit: 1000m
+    volumes:
+     - /apache/wwwroot/development/html:/var/www/www_example.com/public_html/
+    restart: always
