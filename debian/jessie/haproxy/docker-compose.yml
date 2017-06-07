@@ -1,0 +1,36 @@
+version: '2'
+services:
+  haproxy:
+    image: jijeesh/haproxy:latest
+    ports:
+     - "80:80"
+    mem_limit: 3048m
+    cpuset: 0,1
+    volumes:
+     - ./haproxy:/usr/local/etc/haproxy
+    environment:
+       PRODUCTION: "true"
+  tomcatA:
+    image: jijeesh/tomcat8
+    ports:
+     - "8090:8080"
+    mem_limit: 3048m
+    cpuset: 0,1
+    volumes:
+     - ./webappsA:/opt/tomcat/webapps
+     - ./logsA:/opt/tomcat/logs
+    environment:
+       CATALINA_OPTS: "$CATALINA_OPTS   -Dfile.encoding=UTF-8 -Djavax.servlet.request.encoding=UTF-8"
+  tomcatB:
+    image: jijeesh/tomcat8
+    ports:
+     - "8091:8080"
+    mem_limit: 3048m
+    cpuset: 0,1
+    volumes:
+     - ./webappsB:/opt/tomcat/webapps
+     - ./logsB:/opt/tomcat/logs
+    environment:
+       CATALINA_OPTS: "$CATALINA_OPTS   -Dfile.encoding=UTF-8 -Djavax.servlet.request.encoding=UTF-8"
+
+
