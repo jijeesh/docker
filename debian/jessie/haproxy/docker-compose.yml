@@ -1,7 +1,7 @@
 version: '2'
 services:
   haproxy:
-    image: jijeesh/haproxy:latest
+    image: haproxy:1.7
     ports:
      - "80:80"
     mem_limit: 3048m
